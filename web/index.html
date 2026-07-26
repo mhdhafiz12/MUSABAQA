@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121513">
+  <meta name="description" content="Al-Jamiathul Kauzariyya internal management platform for academic operations and live institutional coordination.">
+  <title>{{.Title}}</title>
+  <link rel="preload" as="image" href="{{.BackgroundURL}}" media="(min-width: 701px)" fetchpriority="high">
+  <link rel="preload" as="image" href="{{.BackgroundMobileURL}}" media="(max-width: 700px)" fetchpriority="high">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.png?v=20260712-2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@400;500;700&family=Dosis:wght@300..800&family=Manrope:wght@400..800&family=Noto+Naskh+Arabic:wght@500..700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@400;500;700&family=Dosis:wght@300..800&family=Manrope:wght@400..800&family=Noto+Naskh+Arabic:wght@500..700&display=swap" rel="stylesheet"></noscript>
+  <link rel="modulepreload" href="/assets/react/app.js?v=20260722-musabaqa-page">
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260722-musabaqa-page">
+  <link rel="stylesheet" href="/assets/css/modern.css?v=20260722-musabaqa-responsive">
+  <style>
+    .page-loader{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;contain:strict;background:#061009;color:#fff;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .24s ease,visibility .24s ease}.page-loader-card{width:min(250px,calc(100% - 48px));display:grid;justify-items:center;gap:16px;text-align:center}.page-loader-mark{position:relative;width:58px;height:58px;display:grid;place-items:center;border:1px solid rgba(78,232,131,.24);border-radius:18px;background:rgba(78,232,131,.08);animation:loaderMark 1.25s ease-in-out infinite}.page-loader-mark img{width:38px;height:38px;object-fit:contain;padding:5px;border-radius:10px;background:#fff}.page-loader-mark:after{content:"";position:absolute;inset:-7px;border:1px solid rgba(78,232,131,.3);border-radius:23px;animation:loaderRing 1.25s ease-out infinite}.page-loader-copy{display:grid;gap:5px}.page-loader-copy strong{font:800 13px/1.1 Manrope,Arial,sans-serif;letter-spacing:.03em}.page-loader-copy span{color:rgba(255,255,255,.48);font:700 8px/1.4 Manrope,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}.page-loader-progress{width:150px;height:3px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.09)}.page-loader-progress i{display:block;width:45%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#25ae53,#66ef8b);animation:loaderProgress 1.1s ease-in-out infinite}.page-loader-visible .page-loader{opacity:1;visibility:visible;pointer-events:auto}.page-loader-done .page-loader{opacity:0;visibility:hidden}@keyframes loaderMark{50%{transform:translateY(-3px);box-shadow:0 15px 35px rgba(36,190,79,.18)}}@keyframes loaderRing{to{inset:-19px;opacity:0}}@keyframes loaderProgress{from{transform:translateX(-120%)}to{transform:translateX(270%)}}@media(prefers-reduced-motion:reduce){.page-loader *{animation:none!important}}
+  </style>
+</head>
+<body class="page-{{.Page}}">
+<div class="page-loader" role="status" aria-live="polite" aria-label="Loading Kauzariyya website">
+  <div class="page-loader-card"><span class="page-loader-mark"><img src="/assets/kauzariyya-brand-icon.png" alt=""></span><span class="page-loader-copy"><strong>Al-Jamiathul Kauzariyya</strong><span>Preparing your page</span></span><span class="page-loader-progress" aria-hidden="true"><i></i></span></div>
+</div>
+<script>window.__pageLoaderTimer=setTimeout(function(){document.documentElement.classList.add('page-loader-visible')},450);</script>
+<header class="site-header">
+  <a class="site-logo" href="/" aria-label="Kauzariyya home">
+    <img src="/assets/kauzariyya-brand-icon.png" alt="Kauzariyya" decoding="async">
+    <span><b>Al-Jamiathul Kauzariyya</b><small>Internal Management System</small></span>
+  </a>
+  <nav class="site-nav" aria-label="Main navigation">
+    {{range .Navigation}}<a class="{{if .Active}}active{{end}}" href="{{.Href}}">{{.Label}}</a>{{end}}
+  </nav>
+  <div class="header-account-actions">
+    <div class="festival-date"><span>Festival day</span><b>{{.FestivalDate}}</b></div>
+    <button class="visitor-logout visitor-logout-floating" type="button" data-visitor-logout aria-label="Sign out of this device">
+      <span class="logout-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M10 5H6.8A1.8 1.8 0 0 0 5 6.8v10.4A1.8 1.8 0 0 0 6.8 19H10M14.5 8l4 4-4 4M18 12H9" /></svg></span>
+      <span class="logout-copy"><small>Current session</small><strong>Sign out</strong></span>
+    </button>
+  </div>
+</header>
+<main>
+{{if .VideoEnabled}}<div class="home-video-bg" aria-hidden="true">
+  <video autoplay muted {{if .VideoLoop}}loop{{end}} playsinline preload="metadata" data-background-video data-src="{{.VideoURL}}" style="--video-brightness:{{.VideoBrightness}}"></video>
+</div>{{end}}
+<div id="react-root" data-page="{{.Page}}"></div>
+<script id="initial-data" type="application/json">{{.InitialJSON}}</script>
+</main>
+<footer class="site-footer simple-social-footer home-institution-footer">
+  <aside class="home-footer-utility home-footer-pulse home-footer-location" aria-label="Find Al Jamiathul Kauzariyya">
+    <div class="footer-location-map">
+      <iframe title="Interactive Google Map showing Al Jamiathul Kauzariyya in Edathala" src="https://www.google.com/maps?q=10.0730%2C76.3704&amp;z=16&amp;output=embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="footer-pulse-copy"><p class="overline">Our place · our community</p><h2>Rooted in<br>Edathala.</h2><p>A welcoming campus in Aluva where Qur’anic learning, scholarship and character grow together.</p><a class="footer-directions-link" href="https://www.google.com/maps/search/?api=1&amp;query=10.0730%2C76.3704" target="_blank" rel="noopener noreferrer">Open in Google Maps <b aria-hidden="true">↗</b></a></div>
+  </aside>
+  <div class="home-footer-identity"><h2>AL JAMIATHUL KAUZARIYYA</h2><address>Edathala North P.O., Aluva<br>Ernakulam District, Kerala 683561, India</address></div>
+  <nav class="simple-social-icons" aria-label="Kauzariyya social media">
+    <a class="instagram" href="https://instagram.com/kauzariyya" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 28 28" fill="none"><defs><radialGradient id="instagram-gradient" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(7 26) rotate(-50) scale(29)"><stop stop-color="#ffd600"/><stop offset=".42" stop-color="#ff3a72"/><stop offset=".72" stop-color="#d300c5"/><stop offset="1" stop-color="#7638fa"/></radialGradient></defs><rect x="2" y="2" width="24" height="24" rx="7" fill="url(#instagram-gradient)"/><rect x="7.2" y="7.2" width="13.6" height="13.6" rx="4.2" stroke="#fff" stroke-width="1.8"/><circle cx="14" cy="14" r="3.4" stroke="#fff" stroke-width="1.8"/><circle cx="19" cy="8.9" r="1.1" fill="#fff" stroke="none"/></svg></a>
+    <a class="youtube" href="https://youtube.com/@Kauzariyya?sub_confirmation=1" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 28 28" fill="none"><rect x="2" y="7" width="24" height="14" rx="5" fill="#ff0033"/><path d="m12 10.5 6 3.5-6 3.5v-7Z" fill="#fff" stroke="none"/></svg></a>
+    <a class="whatsapp" href="https://whatsapp.com/channel/0029VaZ7xFm4tRrwIYmLGa31" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 28 28" fill="none"><path d="M23 13.7a9 9 0 0 1-13.3 7.9L5 23l1.5-4.6A9 9 0 1 1 23 13.7Z"/><path d="M9.5 9.8c.2-.5.5-.6.8-.6h.5c.3 0 .5.1.6.4l.8 1.9c.1.3 0 .6-.2.8l-.7.8c-.2.2-.1.5.1.7.5 1 1.4 1.9 2.4 2.5.3.2.6.2.8-.1l.9-1.1c.2-.3.5-.3.8-.2l2 .9c.3.1.5.4.4.7 0 .6-.2 1.5-.8 2-.6.6-1.6.9-2.6.6-1.4-.3-3.2-1.1-4.9-2.7-1.3-1.2-2.4-2.8-2.9-4.2-.4-1.2.1-2.1.5-2.5Z"/></svg></a>
+    <a class="x-social" href="https://x.com/kauzariyya" target="_blank" rel="noopener noreferrer" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.24 2H21l-6.04 6.9L22 22h-5.51l-4.32-5.65L7.23 22H4.47l6.42-7.34L4.14 2h5.65l3.9 5.15L18.24 2Zm-.97 17.7h1.53L8.96 4.18H7.32L17.27 19.7Z" fill="currentColor" stroke="none"/></svg></a>
+    <a class="facebook" href="https://www.facebook.com/Kauzariyya" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="12" fill="#1877f2"/><path d="M15.8 25v-9.4h3.1l.5-3.7h-3.6V9.5c0-1.1.3-1.8 1.9-1.8h2V4.4c-.4-.1-1.6-.2-2.9-.2-2.9 0-4.9 1.8-4.9 5v2.7H8.6v3.7h3.3V25h3.9Z" fill="#fff" stroke="none"/></svg></a>
+  </nav>
+  <p class="home-footer-copyright">© {{.Year}} Al Jamiathul Kauzariyya · All rights reserved</p>
+</footer>
+<script>
+(function(){
+  var finished=false,root=document.getElementById('react-root'),observer;
+  function finish(){
+    if(finished)return;finished=true;clearTimeout(window.__pageLoaderTimer);
+    document.documentElement.classList.remove('page-loader-visible');
+    document.documentElement.classList.add('page-loader-done');
+    if(observer)observer.disconnect();
+    setTimeout(function(){var loader=document.querySelector('.page-loader');if(loader)loader.remove()},320);
+  }
+  if(root&&root.children.length)finish();
+  else if(root){observer=new MutationObserver(function(){if(root.children.length)finish()});observer.observe(root,{childList:true})}
+  window.addEventListener('load',function(){setTimeout(finish,80)},{once:true});
+  setTimeout(finish,12000);
+})();
+</script>
+<script src="/assets/js/site.js?v=20260722-responsive-video" defer></script>
+<script type="module" src="/assets/react/app.js?v=20260722-musabaqa-page"></script>
+</body>
+</html>
